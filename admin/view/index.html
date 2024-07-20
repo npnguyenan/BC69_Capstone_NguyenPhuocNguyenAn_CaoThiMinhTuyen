@@ -3,12 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quản lý nhân viên</title>
+    <title>Phone Management</title>
 
     <!-- Font Awesome -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
 
     <!-- Bootstrap 4 -->
@@ -17,36 +20,87 @@
     <!-- JQuery UI -->
     <link rel="stylesheet" href="../../asset/css/jquery-ui.min.css" />
 
-    <!-- Animate -->
-    <!-- <link rel="stylesheet" href="../../asset/css/animate.css"> -->
-
     <!-- My CSS -->
     <link rel="stylesheet" href="../../asset/css/modal.css" />
 
-    <link rel="stylesheet" href="../../asset/css/style4.css" />
-
-    <link rel="stylesheet" type="text/css" href="../../asset/css/main.css" />
-
     <link rel="stylesheet" type="text/css" href="../../asset/css/index.css" />
+
+    <link rel="stylesheet" href="../../asset/css/header.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/2.1.0/css/dataTables.dataTables.min.css"
+    />
   </head>
 
   <body>
-    <div class="wrapper">
+    <!-- Header -->
+    <header class="p-3 mb-3 border-bottom">
+      <div class="container">
+        <div
+          class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-end"
+        >
+          <a
+            href="/"
+            class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none"
+          >
+            <svg
+              class="bi me-2"
+              width="40"
+              height="32"
+              role="img"
+              aria-label="Bootstrap"
+            >
+              <use xlink:href="#bootstrap" />
+            </svg>
+          </a>
+
+          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3"></form>
+
+          <div class="dropdown text-end">
+            <a
+              href="#"
+              class="d-block link-dark text-decoration-none dropdown-toggle"
+              id="dropdownUser1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img
+                src="https://github.com/mdo.png"
+                alt="mdo"
+                width="32"
+                height="32"
+                class="rounded-circle"
+              />
+            </a>
+            <ul
+              class="dropdown-menu text-small"
+              aria-labelledby="dropdownUser1"
+            >
+              <li>
+                <a class="dropdown-item" href="../../index.html">Back Home</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="wrapper light-mode">
       <!-- Page Content Holder -->
-      <div id="content">
-        <div class="container">
+      <div id="content ">
+        <div class="container tablePhone">
           <div class="card text-center">
             <!-- Header -->
             <div class="card-header myCardHeader">
               <div class="row">
-                <div class="col-md-6">
-                  <h3 class="text-left text-primary font-weight-bold">
+                <div class="col-md-9">
+                  <h3 class="text-left font-weight-bold float-start">
                     Phone Management
                   </h3>
                 </div>
-                <div class="col-md-6 text-right">
+                <div class="col-md-3 text-right">
                   <button
-                    class="btn btn-primary"
+                    class="btn btn-primary float-end"
                     id="btnThem"
                     data-toggle="modal"
                     data-target="#myModal"
@@ -70,22 +124,23 @@
                       oninput="searchPhone(event)"
                     />
                     <div class="input-group-prepend">
-                      <span class="input-group-text" id="btnTimNV"
+                      <span class="input-group-text input-text" id="btnTimNV"
                         ><i class="fa fa-search"></i
                       ></span>
                     </div>
                   </div>
                 </div>
               </div>
-              <table class="table table-bordered table-hover myTable">
+              <table
+                id="myTable"
+                class="table table-bordered table-hover myTable"
+              >
                 <thead class="text-primary">
                   <tr>
                     <th>#</th>
                     <th>Name</th>
                     <th class="nowrap">
                       <span class="mr-1">Price</span>
-                      <i class="fa fa-arrow-up" id="SapXepTang"></i>
-                      <i class="fa fa-arrow-down" id="SapXepGiam"></i>
                     </th>
                     <th class="w-25">Photo</th>
                     <th>Description</th>
@@ -114,19 +169,19 @@
     <div class="modal fade" id="myModal">
       <div class="modal-dialog">
         <div class="modal-content" id="formPhone">
-          <header class="head-form mb-0">
+          <header class="head-form mb-20 p-3">
             <h2 id="header-title">Phone Management</h2>
           </header>
 
           <!-- Modal body -->
           <div class="modal-body">
-            <form role="form">
-              <div class="form-group">
+            <form role="form" id="myForm">
+              <div class="form-group mb-3">
                 <div class="input-group">
                   <div class="input-group-prepend">
-                    <span class="input-group-text"
-                      ><i class="fa fa-user"></i
-                    ></span>
+                    <span class="input-group-text input-text"
+                      ><i class="fa-solid fa-mobile-button fa-lg"></i>
+                    </span>
                   </div>
                   <input
                     type="text"
@@ -134,17 +189,17 @@
                     id="name"
                     class="form-control input-sm"
                     placeholder="Phone name"
+                    aria-describedby="tbPhoneName"
                   />
                 </div>
-
-                <span class="sp-thongbao" id="tbPhoneName"></span>
+                <span class="error text-danger" id="tbPhoneName"></span>
               </div>
 
-              <div class="form-group">
+              <div class="form-group mb-3">
                 <div class="input-group">
                   <div class="input-group-prepend">
-                    <span class="input-group-text"
-                      ><i class="fa fa-address-book"></i
+                    <span class="input-group-text input-text"
+                      ><i class="fa-solid fa-hand-holding-dollar"></i
                     ></span>
                   </div>
                   <input
@@ -153,16 +208,17 @@
                     id="price"
                     class="form-control input-sm"
                     placeholder="Price"
+                    aria-describedby="tbprice"
                   />
                 </div>
-                <span class="sp-thongbao" id="tbPrice"></span>
+                <span class="error text-danger" id="tbprice"></span>
               </div>
 
-              <div class="form-group">
+              <div class="form-group mb-3">
                 <div class="input-group">
                   <div class="input-group-prepend">
-                    <span class="input-group-text"
-                      ><i class="fa fa-envelope"></i
+                    <span class="input-group-text input-text"
+                      ><i class="fa-solid fa-mobile-button"></i
                     ></span>
                   </div>
                   <input
@@ -177,11 +233,11 @@
                 <span class="sp-thongbao" id="tbScreen"></span>
               </div>
 
-              <div class="form-group">
+              <div class="form-group mb-3">
                 <div class="input-group">
                   <div class="input-group-prepend">
-                    <span class="input-group-text"
-                      ><i class="fa fa-key"></i
+                    <span class="input-group-text input-text"
+                      ><i class="fa-solid fa-camera"></i
                     ></span>
                   </div>
                   <input
@@ -195,11 +251,11 @@
                 <span class="sp-thongbao" id="tbBackCamera"></span>
               </div>
 
-              <div class="form-group">
+              <div class="form-group mb-3">
                 <div class="input-group">
                   <div class="input-group-prepend">
-                    <span class="input-group-text"
-                      ><i class="fa fa-calendar"></i
+                    <span class="input-group-text input-text"
+                      ><i class="fa-solid fa-camera"></i
                     ></span>
                   </div>
                   <input
@@ -214,11 +270,11 @@
                 <span class="sp-thongbao" id="tbFrontCamera"></span>
               </div>
 
-              <div class="form-group">
+              <div class="form-group mb-3">
                 <div class="input-group">
                   <div class="input-group-prepend">
-                    <span class="input-group-text"
-                      ><i class="fa fa-money" aria-hidden="true"></i
+                    <span class="input-group-text input-text"
+                      ><i class="fa-solid fa-link"></i
                     ></span>
                   </div>
                   <input
@@ -231,11 +287,11 @@
                 </div>
                 <span class="sp-thongbao" id="tbImage"></span>
               </div>
-              <div class="form-group">
+              <div class="form-group mb-3">
                 <div class="input-group">
                   <div class="input-group-prepend">
-                    <span class="input-group-text"
-                      ><i class="fa fa-money" aria-hidden="true"></i
+                    <span class="input-group-text input-text"
+                      ><i class="fa-brands fa-signal-messenger"></i
                     ></span>
                   </div>
                   <input
@@ -248,14 +304,14 @@
                 </div>
                 <span class="sp-thongbao" id="tbDescription"></span>
               </div>
-              <div class="form-group">
+              <div class="form-group mb-3">
                 <div class="input-group">
                   <div class="input-group-prepend">
-                    <span class="input-group-text"
-                      ><i class="fa fa-briefcase"></i
+                    <span class="input-group-text input-text"
+                      ><i class="fa-solid fa-mobile-button"></i
                     ></span>
                   </div>
-                  <select class="form-control" id="type">
+                  <select class="form-control" id="type" name="type">
                     <option selected>Select brand</option>
                     <option value="Iphone">Iphone</option>
                     <option value="Samsung">Samsung</option>
@@ -274,10 +330,16 @@
               type="button"
               onclick="addPhone()"
               class="btn btn-success"
+              data-dismiss="modal"
             >
               Thêm Phone
             </button>
-            <button id="btnCapNhat" type="button" class="btn btn-success">
+            <button
+              id="btnCapNhat"
+              type="button"
+              class="btn btn-success"
+              onclick="editPhone()"
+            >
               Cập nhật
             </button>
             <button
@@ -310,7 +372,12 @@
     <script src="/../../asset/js/jquery-ui.js"></script>
     <script src="../../asset/js/datepicker.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js"></script>
-    <script type="text/javascript" src="../controller/index.js"></script>
     <!-- <script src="./validation/validation.js"></script> -->
+    <script src="../../asset/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.0/js/dataTables.min.js"></script>
+    <script src="
+https://cdn.jsdelivr.net/npm/jquery-validation@1.21.0/dist/jquery.validate.min.js
+"></script>
+    <script type="text/javascript" src="../controller/index.js"></script>
   </body>
 </html>

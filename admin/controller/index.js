@@ -1,5 +1,6 @@
 const API_URL = "https://6698a23b2069c438cd6f58f5.mockapi.io/api/v1/Products";
 let arrPhone = [];
+let editPhoneId = 0;
 
 function getPhones() {
   axios
@@ -29,7 +30,7 @@ function renderPhoneEle(data) {
       <td>${desc}</td>
       <td>
         <button  class='btn btn-danger ' onclick="deletePhone('${phone.id}')">Xoá</button>
-        <button class='btn btn-warning' onclick="editPhone(${phone.id})">Sửa</button>
+        <button class='btn btn-warning' onclick="showModalEdit(${phone.id})">Sửa</button>
       </td>
     </tr>
       `;
@@ -38,6 +39,9 @@ function renderPhoneEle(data) {
 }
 
 function addPhone() {
+  if (!validation()) {
+    return;
+  }
   let arrField = document.querySelectorAll(
     "#formPhone input, #formPhone select"
   );
@@ -46,11 +50,11 @@ function addPhone() {
     let { id, value } = field;
     phone[id] = value;
   }
+  $("#myModal").modal("hide");
   axios
     .post(API_URL, phone)
     .then(function (response) {
       getPhones();
-      $("#myModal").modal("hide");
     })
     .catch(function (error) {
       console.log(error);
@@ -81,6 +85,90 @@ function searchPhone(event) {
   let tableBody = document.getElementById("tableDanhSach");
   tableBody.innerHTML = html;
 }
+
+function showModalEdit(id) {
+  $("#myModal").modal("show");
+
+  let editPhone = arrPhone.filter((item, index) => {
+    return item.id == id;
+  });
+
+  let name = $("#myModal").find('input[name="name"]')[0];
+  name.value = editPhone[0].name;
+
+  let price = $("#myModal").find('input[name="price"]')[0];
+  price.value = editPhone[0].price;
+
+  let screen = $("#myModal").find('input[name="screen"]')[0];
+  screen.value = editPhone[0].screen;
+
+  let backCamera = $("#myModal").find('input[name="backCamera"]')[0];
+  backCamera.value = editPhone[0].backCamera;
+
+  let frontCamera = $("#myModal").find('input[name="frontCamera"]')[0];
+  frontCamera.value = editPhone[0].frontCamera;
+
+  let img = $("#myModal").find('input[name="image"]')[0];
+  img.value = editPhone[0].img;
+
+  let description = $("#myModal").find('input[name="description"]')[0];
+  description.value = editPhone[0].desc;
+
+  let type = $("#myModal").find('select[name="type"]')[0];
+  type.value = editPhone[0].type;
+
+  editPhoneId = editPhone[0].id;
+}
+
+function editPhone() {
+  if (!validation()) {
+    return;
+  }
+  let arrField = document.querySelectorAll(
+    "#formPhone input, #formPhone select"
+  );
+  let phone = {};
+  for (let field of arrField) {
+    let { id, value } = field;
+    phone[id] = value;
+  }
+
+  axios
+    .put(API_URL + `/${editPhoneId}`, phone)
+    .then(function (response) {
+      $("#myModal").modal("hide");
+      getPhones();
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
+
+function validation() {
+  var myForm = $("#myForm");
+  myForm.validate({
+    rules: {
+      name: {
+        required: true,
+      },
+      price: {
+        required: true,
+        number: true,
+      },
+      type: {
+        required: true,
+      },
+    },
+    messages: {
+      name: "Nhập tên điện thoại hợp lệ",
+      price: "Nhập số tiền hợp lệ",
+    },
+    errorElement: "span",
+  });
+
+  return myForm.valid();
+}
+
 function removeVietnameseTones(str) {
   str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
   str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
@@ -113,3 +201,9 @@ function removeVietnameseTones(str) {
   return str;
 }
 getPhones();
+setTimeout(() => {
+  $("#myTable").DataTable({
+    searching: false,
+    paging: false,
+  });
+}, 300);

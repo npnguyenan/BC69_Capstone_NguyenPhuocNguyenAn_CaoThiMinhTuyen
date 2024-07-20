@@ -277,3 +277,7 @@ body .cd-top--is-visible {
   z-index: 10;
   font-size: 20px;
 }
+.tablePhone {
+  top: 150px;
+  position: relative;
+}
