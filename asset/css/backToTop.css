@@ -1,0 +1,22 @@
+/* Back to top */
+body .cd-top--is-visible {
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.5s;
+}
+.back-to-top {
+  position: fixed;
+  bottom: 5px;
+  right: 20px;
+  padding: 0 22px 2px 22px;
+  text-align: center;
+  line-height: 60px;
+  border-radius: 15px;
+  background-color: #fccd87;
+  color: #494d68;
+  opacity: 0;
+  transition: all 0.5s;
+  visibility: hidden;
+  z-index: 10;
+  font-size: 20px;
+}

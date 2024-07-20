@@ -1,0 +1,16 @@
+/* Slick */
+.slick-arrow {
+  margin: 0 0 0 -10px;
+}
+.slick-arrow::before {
+  color: grey;
+  font-size: 30px;
+}
+.slick-arrow::before:hover {
+  transition: 0.5s all;
+  cursor: pointer;
+}
+.slick-dots li button:before {
+  transform: translateY(-25px);
+  font-size: 10px;
+}

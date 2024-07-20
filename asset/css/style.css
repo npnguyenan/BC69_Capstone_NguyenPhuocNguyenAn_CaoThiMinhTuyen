@@ -59,13 +59,13 @@ header .fa-cart-shopping,
 header .fa-user-pen {
   color: white;
   font-size: 30px;
-  padding: 35px 0 0 30px;
+  margin: 35px 0 0 30px;
 }
 header .fa-moon,
 header .fa-sun {
   color: #d5a484;
   font-size: 30px;
-  padding: 35px 0 0 30px;
+  margin: 35px 0 0 30px;
 }
 header .fa-cart-shopping:hover,
 header .fa-user-pen:hover {
@@ -92,7 +92,6 @@ header .cart-overlay {
   width: 20px;
   color: white;
   background-color: #ed3b3b;
-  display: block;
   font-size: 13px;
   position: relative;
   top: -40px;
@@ -281,46 +280,6 @@ footer {
 }
 .footer-content .content-item img {
   margin: 10px 5px 5px 0;
-}
-
-/* Slick */
-.slick-arrow {
-  margin: 0 0 0 -10px;
-}
-.slick-arrow::before {
-  color: grey;
-  font-size: 30px;
-}
-.slick-arrow::before:hover {
-  transition: 0.5s all;
-  cursor: pointer;
-}
-.slick-dots li button:before {
-  transform: translateY(-25px);
-  font-size: 10px;
-}
-
-/* Back to top */
-body .cd-top--is-visible {
-  visibility: visible;
-  opacity: 1;
-  transition: all 0.5s;
-}
-.back-to-top {
-  position: fixed;
-  bottom: 5px;
-  right: 20px;
-  padding: 0 22px 2px 22px;
-  text-align: center;
-  line-height: 60px;
-  border-radius: 15px;
-  background-color: #fccd87;
-  color: #494d68;
-  opacity: 0;
-  transition: all 0.5s;
-  visibility: hidden;
-  z-index: 10;
-  font-size: 20px;
 }
 
 /* Shopping cart */

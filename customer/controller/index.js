@@ -320,11 +320,11 @@ function countingCart(arr = arrCart) {
   if (arr.length == 0) {
     document
       .querySelector("header .cart .cart-overlay")
-      .classList.add("d-none");
+      .classList.add("invisible");
   } else {
     document
       .querySelector("header .cart .cart-overlay")
-      .classList.remove("d-none");
+      .classList.remove("invisible");
   }
 }
 
