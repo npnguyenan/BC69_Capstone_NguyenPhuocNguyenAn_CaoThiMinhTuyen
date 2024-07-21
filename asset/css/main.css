@@ -1,0 +1,18 @@
+.sp-thongbao {
+  color: red;
+  margin-left: 2px;
+  display: none;
+}
+
+#SapXepGiam {
+  display: none;
+}
+
+#content {
+  width: 100%;
+}
+
+.myCardHeader,
+.myCardFooter {
+  background-color: transparent;
+}

@@ -36,7 +36,7 @@ async function getAllProducts() {
   try {
     let result = await axios({
       method: "GET",
-      url: "https://6698aa952069c438cd6f73c2.mockapi.io/api/v1/Products",
+      url: "https://6698a23b2069c438cd6f58f5.mockapi.io/api/v1/Products",
     });
     renderProductsList(result.data);
   } catch (error) {
@@ -54,7 +54,7 @@ function renderProductsList(arrProducts) {
     let { id, name, price, desc, img, type, backCamera, frontCamera, screen } =
       item;
     content += `
-          <div class="col-3">
+          <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="product-item">
               <div class="item_bg text-center">
                 <img
@@ -79,7 +79,7 @@ function renderProductsList(arrProducts) {
                     <p>Mô tả sản phẩm: ${desc}</p>
                   </div>
                   <div class="content_button text-center">
-                    <button class="btn btn-warning" onclick="addToCart(${id})">Thêm vào giỏ hàng<i class="fa-solid fa-cart-shopping"></i></button>
+                    <button class="btn btn-warning" onclick="addToCart(${id})"><span>Thêm vào giỏ hàng</span><i class="fa-solid fa-cart-shopping"></i></button>
                   </div>
                 </div>
               </div>
@@ -97,7 +97,7 @@ async function filterProducts() {
   try {
     let result = await axios({
       method: "GET",
-      url: "https://6698aa952069c438cd6f73c2.mockapi.io/api/v1/Products",
+      url: "https://6698a23b2069c438cd6f58f5.mockapi.io/api/v1/Products",
     });
     let arrProducts = [];
     arrProducts = result.data;
@@ -121,19 +121,30 @@ async function searchProducts(event) {
   let searchValue = removeVietnameseTones(
     event.target.value.toLowerCase().trim()
   );
+  let typeSelect = document.getElementById("filterTypeProducts").value;
   try {
     let result = await axios({
       method: "GET",
-      url: "https://6698aa952069c438cd6f73c2.mockapi.io/api/v1/Products",
+      url: "https://6698a23b2069c438cd6f58f5.mockapi.io/api/v1/Products",
     });
     let arrProducts = [];
     arrProducts = result.data;
-    arrSearchProducts = arrProducts.filter((item, index) => {
-      let newSearchValue = removeVietnameseTones(
-        item.name.toLowerCase().trim()
-      );
-      return newSearchValue.includes(searchValue);
-    });
+    if (typeSelect == "Chọn thương hiệu") {
+      arrSearchProducts = arrProducts.filter((item, index) => {
+        let newSearchValue = removeVietnameseTones(
+          item.name.toLowerCase().trim()
+        );
+        return newSearchValue.includes(searchValue);
+      });
+    } else {
+      arrSearchProducts = arrProducts.filter((item, index) => {
+        let newSearchValue = removeVietnameseTones(
+          item.name.toLowerCase().trim()
+        );
+        return newSearchValue.includes(searchValue) && item.type == typeSelect;
+      });
+    }
+
     if (arrSearchProducts.length != 0) {
       renderProductsList(arrSearchProducts);
     } else {
@@ -172,7 +183,7 @@ async function addToCart(id) {
   try {
     let result = await axios({
       method: "GET",
-      url: `https://6698aa952069c438cd6f73c2.mockapi.io/api/v1/Products/${id}`,
+      url: `https://6698a23b2069c438cd6f58f5.mockapi.io/api/v1/Products/${id}`,
     });
     let newProduct = new Cart();
     Object.assign(newProduct, result.data);

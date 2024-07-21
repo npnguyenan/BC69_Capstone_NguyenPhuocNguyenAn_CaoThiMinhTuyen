@@ -1,0 +1,21 @@
+header,
+section,
+footer,
+aside,
+nav,
+main,
+article,
+figure {
+  display: block;
+}
+
+img {
+  max-width: 100%;
+}
+
+.phone-img {
+  width: 30%;
+}
+.input-text {
+  height: 100%;
+}

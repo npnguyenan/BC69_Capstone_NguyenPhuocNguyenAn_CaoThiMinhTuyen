@@ -107,14 +107,14 @@ header .cart-overlay {
   height: 60vh;
   box-shadow: 0 15px 38px 0 rgba(0, 0, 0, 0.2);
   position: relative;
-  top: 36px;
+  top: 50px;
 }
 .banner_slide {
   padding: 45px 0 35px 0;
   background-color: #f6f6f6;
   box-shadow: 0 15px 38px 0 rgba(0, 0, 0, 0.2);
   border-radius: 0 0 10px 10px;
-  transform: translateY(-20px);
+  transform: translateY(-15px);
 }
 .banner_slide .slide_item .item_bg img {
   width: 100%;
@@ -134,8 +134,6 @@ header .cart-overlay {
   padding: 5px 0 5px 0;
   display: flex;
   justify-content: end;
-  /* border-bottom: 1px solid #dbdbd9;
-  border-top: 1px solid #dbdbd9; */
 }
 
 .filter_type .filter_content select {
@@ -298,11 +296,11 @@ footer {
 /* Card */
 .card {
   position: fixed;
-  top: 105px;
+  top: 120px;
   right: -100%;
   width: 360px;
   min-height: 30vh;
-  max-height: 80vh;
+  max-height: 75vh;
   padding: 20px;
   background: white;
   box-shadow: 0 15px 38px 0 rgba(0, 0, 0, 0.2);
